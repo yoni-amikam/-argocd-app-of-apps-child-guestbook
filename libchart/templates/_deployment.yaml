@@ -68,7 +68,6 @@ spec:
           {{- end }}
           env:     
             {{- with .Values.image.env }}
-              {{- end }}
               {{- range .secrets }}
               - name: {{ .name }}
                 valueFrom:
