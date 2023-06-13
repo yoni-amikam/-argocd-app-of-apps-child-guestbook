@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: linearb-on-prem.jfrog.io/agent-poller
   pullPolicy: Always
-  tag: "placeholder"
+  tag: "agent-poller"
   env:
     - name: DD_TAGS
       valueFrom:
