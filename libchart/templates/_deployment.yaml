@@ -68,19 +68,6 @@ spec:
           {{- end }}
           env:     
             {{- with .Values.image.env }}
-              {{- if  .chartValues -}}
-              {{- range $key, $value := .chartValues }}
-              - name: {{ $key }}
-                value: {{ $value | quote }}
-              {{- end }}
-              {{- end }}
-              {{- range .secrets }}
-              - name: {{ .name }}
-                valueFrom:
-                  secretKeyRef:
-                    name: {{ .valueFrom.secretKeyRef.name }}
-                    key: {{ .valueFrom.secretKeyRef.key | quote }}
-              {{- end }}
               {{- range .parametersStore }}
               - name: {{ .name }}
                 valueFrom:
