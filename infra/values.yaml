@@ -1,23 +1,16 @@
-# Default values for agent-poller.
+# Default values for infra.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: linearb-on-prem.jfrog.io/agent-poller
-  pullPolicy: Always
-  tag: "v2.0.2-k8s"
-  env:
-    parametersStore:
-      - name: "ON_PREM_API_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "ON_PREM_API_SERVICE_URL"
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
-imagePullSecrets:
-  - name: regcred
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -43,6 +36,10 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+service:
+  type: ClusterIP
+  port: 80
+
 ingress:
   enabled: false
   className: ""
@@ -59,12 +56,17 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources:
-   limits:
-     memory: 128Mi
-   requests:
-     cpu: 100m
-     memory: 128Mi
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
 autoscaling:
   enabled: false

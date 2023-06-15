@@ -1,0 +1,33 @@
+{{- if eq .Values.image.env.chartValues.K8S_PLATFORM "k3d" }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-pv
+  labels:
+    type: local
+    purpose: minio
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{ .Values.image.env.chartValues.PV_SIZE }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/linearb/k3dvol"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-pvc
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.image.env.chartValues.PV_SIZE }}
+  selector:
+    matchLabels:
+      purpose: minio
+{{- end }}

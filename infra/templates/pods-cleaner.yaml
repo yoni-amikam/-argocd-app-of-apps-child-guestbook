@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pods-cleaner
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccount: scheduler-worker
+          imagePullSecrets:
+          - name: regcred
+          containers:
+          - name: delete-pods
+            image: linearb-on-prem.jfrog.io/pods-cleaner:latest
+            env:
+            - name: DAYS_OFFSET_FOR_FAILED_JOBS
+              valueFrom:
+                configMapKeyRef:
+                  name: charts-values
+                  key: DAYS_OFFSET_FOR_FAILED_JOBS
+          restartPolicy: Never
+      backoffLimit: 1
