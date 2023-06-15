@@ -1,0 +1,51 @@
+{{- define "libchart.hpa" -}}
+{{- if .Values.autoscaling.enabled }}
+{{- $fullName := include "libchart.fullname" . -}}
+apiVersion: autoscaling/v2beta2
+#apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: "internal-{{ $fullName }}"
+  labels:
+    {{- include "libchart.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: "internal-{{ $fullName }}"
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.autoscaling.metricName }}
+    - type: External
+      external:
+        metric:
+          name: {{ .Values.autoscaling.metricName }}
+          selector:
+            matchLabels:
+              service: "internal-{{ $fullName }}"
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.autoscaling.metricLimit }}
+    {{- end }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 600
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 60
+{{- end }}
+{{- end }}
