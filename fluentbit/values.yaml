@@ -4,7 +4,7 @@
 kind: DaemonSet
 
 # replicaCount -- Only applicable if kind=Deployment
-replicaCount: 2
+replicaCount: 1
 
 image:
   repository: cr.fluentbit.io/fluent/fluent-bit
@@ -237,7 +237,7 @@ autoscaling:
 
   enabled: false
   minReplicas: 1
-  maxReplicas: 6
+  maxReplicas: 3
   targetCPUUtilizationPercentage: 75
 #  targetMemoryUtilizationPercentage: 75
    ## see https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics

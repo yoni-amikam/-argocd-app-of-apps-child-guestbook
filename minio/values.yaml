@@ -16,7 +16,7 @@ replicas: 1
 
 resources: 
   requests:
-    memory: 2Gi
+    memory: 1Gi
 
 
 ## Enable persistence using Persistent Volume Claims
