@@ -84,9 +84,9 @@ spec:
               {{- range .parametersStore }}
               - name: {{ .name }}
                 valueFrom:
-                  secretKeyRef:
-                    name: {{ .valueFrom.secretKeyRef.name }}
-                    key: {{ .valueFrom.secretKeyRef.key | quote }}
+                  configMapKeyRef:
+                    name: {{ .valueFrom.configMapKeyRef.name }}
+                    key: {{ .valueFrom.configMapKeyRef.key | quote }}
               {{- end }}
             {{- end }}
               - name: THIS_POD_NAMESPACE
