@@ -11,10 +11,9 @@ image:
   tag: ""
   env:
     chartValues:
-      - name: MINIO_PV_SIZE
-        value: "2Gi"
-      - name: K8S_PLATFORM
-        value: "eks"
+      MINIO_PV_SIZE: "2Gi"
+      K8S_PLATFORM: "eks"
+
 
 imagePullSecrets: []
 nameOverride: ""
