@@ -76,7 +76,7 @@ spec:
                     key: {{ .valueFrom.configMapKeyRef.key | quote }}
               {{- end }}
             {{- end }}
-              - name: THIS_POD_NAMESPACE
+              - name: THIS_POD_NAMESPACE2
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.namespace
