@@ -1,3 +1,2 @@
-{{- include "libchart.deployment"  . }}
----
+
 {{- include "libchart.serviceAccount"  . }}
