@@ -10,11 +10,11 @@ image:
   tag: "v2.0.2-k8s"
   env:
     parametersStore:
-      - name: ON_PREM_API_SERVICE_URL
+      - name: "charts-values"
         valueFrom:
           configMapKeyRef:
-            name: charts-values
-            key: ON_PREM_API_SERVICE_URL
+            name: "aa"
+            key: "a"
 
 
 imagePullSecrets:
