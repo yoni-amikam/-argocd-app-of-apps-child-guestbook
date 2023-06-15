@@ -6,7 +6,7 @@ metadata:
   name: "{{ $fullName }}"
   labels:
     {{- include "libchart.labels" . | nindent 4 }}
-    
+
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -23,7 +23,7 @@ spec:
   selector:
     matchLabels:
       {{- include "libchart.selectorLabels" . | nindent 6 }}
-      
+
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -35,6 +35,7 @@ spec:
         {{- if eq .Values.image.pullPolicy "Always" }}
         date: "{{ now | unixEpoch }}"
         {{- end }}
+
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -51,7 +52,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.image.command }}
           {{- with .Values.image.command }}
-          command: 
+          command:
           {{- toYaml . | nindent 12 }}
           {{- end }}
           args:
@@ -65,29 +66,36 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- end }}
-          env:     
+          env:
             {{- with .Values.image.env }}
+              {{- range .parametersStore }}
+              - name: {{ .name }}
+                valueFrom:
+                  configMapKeyRef:
+                    name: {{ .valueFrom.configMapKeyRef.name }}
+                    key: {{ .valueFrom.configMapKeyRef.key | quote }}
+              {{- end }}
             {{- end }}
-              - name: THIS_POD_NAMESPACE2
+              - name: THIS_POD_NAMESPACE
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.namespace
-              - name: DD_TAGS2
-                valueFrom: 
+              - name: DD_TAGS
+                valueFrom:
                   configMapKeyRef:
                     name: charts-values
                     key: DD_TAGS
               - name: DD_ENV
-                valueFrom: 
+                valueFrom:
                   configMapKeyRef:
                     name: charts-values
                     key: DD_ENV
               - name: DD_ENV_TAG
-                valueFrom: 
+                valueFrom:
                   configMapKeyRef:
                     name: charts-values
-                    key: DD_ENV  
-          
+                    key: DD_ENV
+
           {{- if .Values.service }}
           ports:
             - name: http
