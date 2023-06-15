@@ -13,8 +13,8 @@ image:
       - name: "charts-values"
         valueFrom:
           configMapKeyRef:
-            name: ON_PREM_API_SERVICE_URL
-            key: ON_PREM_API_SERVICE_URL
+            name: "ON_PREM_API_SERVICE_URL"
+            key: "ON_PREM_API_SERVICE_URL"
 
 
 imagePullSecrets:
