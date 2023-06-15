@@ -1,4 +1,2 @@
 auth:
-  username: "admin"
-  password: "admin"
-  moshe: yoni
+  existingPasswordSecret: my-secret
