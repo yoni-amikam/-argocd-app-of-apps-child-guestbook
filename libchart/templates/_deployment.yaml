@@ -68,13 +68,6 @@ spec:
           {{- end }}
           env:     
             {{- with .Values.image.env }}
-              {{- range .parametersStore }}
-              - name: {{ .name }}
-                valueFrom:
-                  configMapKeyRef:
-                    name: {{ .valueFrom.configMapKeyRef.name }}
-                    key: {{ .valueFrom.configMapKeyRef.key | quote }}
-              {{- end }}
             {{- end }}
               - name: THIS_POD_NAMESPACE2
                 valueFrom:
