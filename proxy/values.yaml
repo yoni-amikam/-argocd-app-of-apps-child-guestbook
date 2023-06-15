@@ -9,7 +9,7 @@ image:
   # pullPolicy: IfNotPresent
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "k3d-test"
+  tag: "v2.0.2-k8s"
 
 #imagePullSecrets: []
 imagePullSecrets:
