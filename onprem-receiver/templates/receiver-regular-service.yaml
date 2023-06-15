@@ -1,0 +1,30 @@
+{{- if eq true .Values.image.env.chartValues.RECEIVER_INGRESS -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: onprem-receiver
+  
+    
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+    
+    {{- if .Values.additionalPorts }}
+    {{- range .Values.additionalPorts }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      protocol: TCP
+      targetPort: {{ .name }}
+    {{- end }}
+    {{- end }}
+
+  selector:
+    app.kubernetes.io/instance: onprem-receiver
+    app.kubernetes.io/name: onprem-receiver
+
+
+{{- end }}

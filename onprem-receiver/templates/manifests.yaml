@@ -1,0 +1,5 @@
+{{- include "libchart.deployment"  . }}
+---
+{{- include "libchart.serviceAccount"  . }}
+---
+{{- include "libchart.ingress"  . }}
