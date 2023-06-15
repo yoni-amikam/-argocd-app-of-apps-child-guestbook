@@ -35,7 +35,6 @@ spec:
         {{- if eq .Values.image.pullPolicy "Always" }}
         date: "{{ now | unixEpoch }}"
         {{- end }}
-        
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -73,7 +72,7 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.namespace
-              - name: DD_TAGS
+              - name: DD_TAGS2
                 valueFrom: 
                   configMapKeyRef:
                     name: charts-values
