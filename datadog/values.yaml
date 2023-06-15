@@ -1,0 +1,6 @@
+datadog:
+  clusterName:  linearb-unknown
+  kubeStateMetricsEnabled: true
+  containerExclude: "kube_namespace:.*"
+  containerInclude: "kube_namespace:linearb"
+  containerExcludeLogs: "image:k8s.gcr.io/kube-state-metrics"
