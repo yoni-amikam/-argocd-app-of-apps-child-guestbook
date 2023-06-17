@@ -66,6 +66,11 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "CACHE_REDIS_HOST"
+      - name: "LINEARB_PUBLIC_API_KEY"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINEARB_PUBLIC_API_KEY"
 
 imagePullSecrets:
   - name: regcred
