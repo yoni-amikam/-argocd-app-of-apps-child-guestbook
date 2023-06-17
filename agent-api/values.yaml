@@ -46,6 +46,11 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "ONGOING_CONCURRENT_PROCESSES"
+      - name: "AWS_DEFAULT_REGION"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_DEFAULT_REGION"
 
 imagePullSecrets:
   - name: regcred
