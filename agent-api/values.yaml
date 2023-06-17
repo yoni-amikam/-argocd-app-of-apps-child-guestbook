@@ -47,9 +47,9 @@ image:
             name: "charts-values"
             key: "ONGOING_CONCURRENT_PROCESSES"
 
-# imagePullSecrets: []
 imagePullSecrets:
   - name: regcred
+
 nameOverride: ""
 fullnameOverride: ""
 

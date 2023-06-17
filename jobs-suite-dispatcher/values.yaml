@@ -20,6 +20,7 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "EXECUTION_MODE"
+
 imagePullSecrets:
   - name: regcred
 nameOverride: ""
