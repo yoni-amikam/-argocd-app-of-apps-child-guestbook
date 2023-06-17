@@ -9,6 +9,43 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.18"
+  env:
+    parametersStore:
+      - name: "PLATFORM"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "PLATFORM"
+      - name: "ONPREM_LINTA_IMAGE"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ONPREM_LINTA_IMAGE"
+      - name: "LINB_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINB_REST_SERVICE_URL"
+      - name: "DOCKER_CLEANUP_TIME_DELTA"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "DOCKER_CLEANUP_TIME_DELTA"
+      - name: "ORG_ID"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ORG_ID"
+      - name: "ONGOING_INITIAL_BACKWARD_DAYS"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ONGOING_INITIAL_BACKWARD_DAYS"
+      - name: "ONGOING_CONCURRENT_PROCESSES"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ONGOING_CONCURRENT_PROCESSES"
 
 # imagePullSecrets: []
 imagePullSecrets:
