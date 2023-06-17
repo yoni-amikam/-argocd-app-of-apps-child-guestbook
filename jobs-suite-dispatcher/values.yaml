@@ -25,6 +25,7 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "AWS_DEFAULT_REGION"
+
 imagePullSecrets:
   - name: regcred
 nameOverride: ""
