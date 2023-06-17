@@ -20,6 +20,7 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "RABBIT_QUEUE_NAME"
+
 imagePullSecrets:
   - name: regcred
 nameOverride: ""

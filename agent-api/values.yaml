@@ -49,7 +49,6 @@ image:
 
 imagePullSecrets:
   - name: regcred
-
 nameOverride: ""
 fullnameOverride: ""
 
