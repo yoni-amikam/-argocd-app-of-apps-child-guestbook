@@ -56,6 +56,16 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "CACHE_REDIS_PORT"
+      - name: "CACHE_REDIS_DB"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "CACHE_REDIS_DB"
+      - name: "CACHE_REDIS_HOST"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "CACHE_REDIS_HOST"
 
 imagePullSecrets:
   - name: regcred
