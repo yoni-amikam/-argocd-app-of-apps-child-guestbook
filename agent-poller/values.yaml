@@ -15,11 +15,6 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "ON_PREM_API_SERVICE_URL"
-      - name: "RABBIT_QUEUE_NAME"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "RABBIT_QUEUE_NAME"
 
 imagePullSecrets:
   - name: regcred

@@ -10,11 +10,6 @@ image:
   tag: "v2.0.2-k8s"
   env:
     parametersStore:
-      - name: "RABBITMQ_BATCH_JOBS_QUEUE_NAME"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "RABBITMQ_BATCH_JOBS_QUEUE_NAME"
       - name: "EXECUTION_MODE"
         valueFrom:
           configMapKeyRef:
