@@ -30,11 +30,27 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "CACHE_REDIS_DB"
-      - name: "CACHE_REDIS_HOST"
+      - name: "RABBITMQ_USER"
         valueFrom:
           configMapKeyRef:
             name: "charts-values"
-            key: "CACHE_REDIS_HOST"
+            key: "RABBITMQ_USER"
+      - name: "CACHE_REDIS_PORT"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "CACHE_REDIS_PORT"
+      - name: "RABBITMQ_PASSWORD"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_PASSWORD"
+      - name: "RABBITMQ_PORT"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_PORT"
+
 imagePullSecrets:
   - name: regcred
 nameOverride: ""
