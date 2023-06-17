@@ -8,7 +8,7 @@ image:
   repository: linearb-on-prem.jfrog.io/agent-api
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.18"
+  tag: "v2.0.2-k8s"
   env:
     parametersStore:
       - name: "PLATFORM"
