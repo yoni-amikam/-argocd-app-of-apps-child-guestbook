@@ -51,6 +51,11 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "AWS_DEFAULT_REGION"
+      - name: "CACHE_REDIS_PORT"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "CACHE_REDIS_PORT"
 
 imagePullSecrets:
   - name: regcred
