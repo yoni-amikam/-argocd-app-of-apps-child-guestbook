@@ -75,6 +75,10 @@ spec:
                     name: {{ .valueFrom.configMapKeyRef.name }}
                     key: {{ .valueFrom.configMapKeyRef.key | quote }}
               {{- end }}
+              {{- range .chartValues }}
+              - name: {{ .name }}
+                value: {{ .value }}
+              {{- end }}
             {{- end }}
               - name: THIS_POD_NAMESPACE
                 valueFrom:
