@@ -9,6 +9,18 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v2.0.2-k8s"
+  env:
+    parametersStore:
+      - name: "RABBITMQ_USER"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_USER"
+      - name: "RABBITMQ_PASSWORD"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_PASSWORD"
   command: ["./run-celery.sh"]
 
 imagePullSecrets:
