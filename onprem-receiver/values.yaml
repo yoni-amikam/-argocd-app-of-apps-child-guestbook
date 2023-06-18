@@ -10,12 +10,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.19"
   env:
-    parametersStore:
+    chartValues:
       - name: "RECEIVER_INGRESS"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "RECEIVER_INGRESS"
+        value: false
 
 imagePullSecrets:
   - name: regcred
