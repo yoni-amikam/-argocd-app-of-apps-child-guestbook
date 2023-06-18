@@ -15,6 +15,16 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "ON_PREM_API_SERVICE_URL"
+      - name: "RABBITMQ_USER"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_USER"
+      - name: "RABBITMQ_PASSWORD"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_PASSWORD"
 
 imagePullSecrets:
   - name: regcred
