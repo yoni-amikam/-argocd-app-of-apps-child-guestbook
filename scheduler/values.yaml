@@ -21,6 +21,11 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "RABBITMQ_PASSWORD"
+      - name: "RABBITMQ_PORT"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_PORT"
   command: ["python", "app.py"]
 
 imagePullSecrets:
