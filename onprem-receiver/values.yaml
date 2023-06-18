@@ -11,8 +11,7 @@ image:
   tag: "v1.0.19"
   env:
     chartValues:
-      - name: "RECEIVER_INGRESS"
-        value: false
+      RECEIVER_INGRESS: false
 
 imagePullSecrets:
   - name: regcred
