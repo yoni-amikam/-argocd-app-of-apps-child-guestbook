@@ -22,6 +22,11 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "LINEARB_PUBLIC_API_PATH"
+      - name: "LINEARB_PUBLIC_API_ERT_PATH"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINEARB_PUBLIC_API_ERT_PATH"
 
 #imagePullSecrets: []
 imagePullSecrets:
