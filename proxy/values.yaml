@@ -11,6 +11,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v2.0.2-k8s"
   env:
+    chartValues:
+      TAG: "v2.0.2-k8s"
     parametersStore:
       - name: "LINEARB_PUBLIC_API_HOST"
         valueFrom:
