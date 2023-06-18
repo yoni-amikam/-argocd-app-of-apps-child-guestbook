@@ -10,6 +10,13 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v2.0.2-k8s"
+  env:
+    parametersStore:
+      - name: "LINEARB_PUBLIC_API_HOST"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINEARB_PUBLIC_API_HOST"
 
 #imagePullSecrets: []
 imagePullSecrets:

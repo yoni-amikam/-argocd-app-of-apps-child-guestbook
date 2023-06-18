@@ -71,11 +71,6 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "LINEARB_PUBLIC_API_KEY"
-      - name: "LINEARB_PUBLIC_API_HOST"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "LINEARB_PUBLIC_API_HOST"
 
 imagePullSecrets:
   - name: regcred
