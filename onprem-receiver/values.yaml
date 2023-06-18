@@ -9,11 +9,13 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.19"
-
   env:
-    # chartValues:
-    #   - name: VAR1
-    #     value: var1
+    parametersStore:
+      - name: "RECEIVER_INGRESS"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RECEIVER_INGRESS"
 
 # imagePullSecrets: []
 imagePullSecrets:
