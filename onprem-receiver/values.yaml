@@ -17,7 +17,6 @@ image:
             name: "charts-values"
             key: "RECEIVER_INGRESS"
 
-# imagePullSecrets: []
 imagePullSecrets:
   - name: regcred
 
