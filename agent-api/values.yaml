@@ -77,9 +77,6 @@ image:
             name: "charts-values"
             key: "LINEARB_PUBLIC_API_HOST"
 
-
-
-
 imagePullSecrets:
   - name: regcred
 nameOverride: ""
