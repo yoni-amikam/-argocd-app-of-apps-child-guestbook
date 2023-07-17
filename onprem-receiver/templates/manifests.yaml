@@ -1,5 +1,12 @@
-{{- include "libchart.deployment"  . }}
+{{- include "libchart.deployment_v2"  . }}
 ---
 {{- include "libchart.serviceAccount"  . }}
 ---
+{{- if eq "true" (.Values.image.env.chartValues.RECEIVER_INGRESS | toString) -}}
 {{- include "libchart.ingress"  . }}
+---
+{{- include "libchart.service" (merge (dict "serviceType" "ClusterIP") .) }}
+---
+{{- else }}
+{{- include "libchart.service" (merge (dict "serviceType" "LoadBalancer") .) }}
+{{- end }}

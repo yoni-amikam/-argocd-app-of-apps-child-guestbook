@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: charts-values
+data:
+  {{- with .Values.image.env }}
+  {{- range $key, $value := .chartValues }}
+  {{ $key }}: {{ $value | quote }} 
+  {{- end }}
+  {{- end }}
+  DD_TAGS: {{ include "infra.dd_tags" . | quote }}
+  DD_ENV: {{ include "infra.dd_env" . | quote }}
+  PROXY_PASS_API_DESTINATION: {{ include "infra.proxy_pass_api_destination" . | quote }}
+
+  
+  

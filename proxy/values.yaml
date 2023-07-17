@@ -9,33 +9,39 @@ image:
   # pullPolicy: IfNotPresent
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v2.0.2-k8s"
+  tag: "support-external-proxy-k8s"
   env:
-    chartValues:
-      - name: "TAG"
-        value: "v2.0.2-k8s"
-    parametersStore:
-      - name: "LINEARB_PUBLIC_API_HOST"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "LINEARB_PUBLIC_API_HOST"
+    configMap:
       - name: "LINEARB_PUBLIC_API_PATH"
         valueFrom:
           configMapKeyRef:
             name: "charts-values"
             key: "LINEARB_PUBLIC_API_PATH"
-      - name: "LINEARB_PUBLIC_API_ERT_PATH"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "LINEARB_PUBLIC_API_ERT_PATH"
       - name: "LINEARB_PUBLIC_API_KEY"
         valueFrom:
           configMapKeyRef:
             name: "charts-values"
             key: "LINEARB_PUBLIC_API_KEY"
-
+      - name: "LINEARB_PUBLIC_API_HOST"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINEARB_PUBLIC_API_HOST"
+      - name: "PROXY_PASS_API_DESTINATION"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "PROXY_PASS_API_DESTINATION"
+      - name: "LINEARB_PUBLIC_API_ERT_PATH"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINEARB_PUBLIC_API_ERT_PATH"
+      - name: "INFERENCE_ESTIMATED_REVIEW_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "INFERENCE_ESTIMATED_REVIEW_URL"
 
 #imagePullSecrets: []
 imagePullSecrets:

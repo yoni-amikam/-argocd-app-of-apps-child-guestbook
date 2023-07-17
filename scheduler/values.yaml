@@ -8,9 +8,15 @@ image:
   repository: linearb-on-prem.jfrog.io/scheduler
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v2.0.2-k8s"
+  tag: ""
+  command: ["python", "app.py"]
   env:
-    parametersStore:
+    configMap:
+      - name: "ON_PREM_API_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ON_PREM_API_SERVICE_URL"
       - name: "RABBITMQ_USER"
         valueFrom:
           configMapKeyRef:
@@ -21,12 +27,101 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "RABBITMQ_PASSWORD"
+      - name: "RABBIT_SERVER"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBIT_SERVER"
       - name: "RABBITMQ_PORT"
         valueFrom:
           configMapKeyRef:
             name: "charts-values"
             key: "RABBITMQ_PORT"
-  command: ["python", "app.py"]
+      - name: "RABBITMQ_BATCH_JOBS_QUEUE_NAME"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_BATCH_JOBS_QUEUE_NAME"
+      - name: "ONPREM_LINTA_IMAGE"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ONPREM_LINTA_IMAGE"
+      - name: "LINB_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINB_REST_SERVICE_URL"
+      - name: "PR_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "PR_SERVICE_URL"
+      - name: "SETTINGS_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "SETTINGS_SERVICE_URL"
+      - name: "PM_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "PM_REST_SERVICE_URL"
+      - name: "LINTA_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINTA_REST_SERVICE_URL"
+      - name: "LINTA_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINTA_SERVICE_URL"
+      - name: "SENSORS_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "SENSORS_SERVICE_URL"
+      - name: "AGENT_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AGENT_SERVICE_URL"
+      - name: "INFERENCE_ESTIMATED_REVIEW_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "INFERENCE_ESTIMATED_REVIEW_URL"
+      - name: "AWS_DEFAULT_REGION"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_DEFAULT_REGION"
+      - name: "AWS_ACCESS_KEY_ID"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_ACCESS_KEY_ID"
+      - name: "AWS_SECRET_ACCESS_KEY"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_SECRET_ACCESS_KEY"
+      - name: "S3_UPLOAD_THREAD_POOL_SIZE"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "S3_UPLOAD_THREAD_POOL_SIZE"
+      - name: "SCHEDULER_NUMBER_OF_CELERY_WORKERS"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "SCHEDULER_NUMBER_OF_CELERY_WORKERS"
+      - name: "ONGOING_CONCURRENT_PROCESSES"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ONGOING_CONCURRENT_PROCESSES"
 
 imagePullSecrets:
   - name: regcred

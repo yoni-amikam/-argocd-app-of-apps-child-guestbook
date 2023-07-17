@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tunneller.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "tunneller.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "tunneller.chart" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "tunneller.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "tunneller.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+{{- with .Values.podAnnotations }}
+      annotations:
+{{ toYaml . | indent 8 }}
+{{- end }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - socat
+          {{- if eq .Values.external_proxy.type "connect" }}
+          args:
+            - "TCP4-LISTEN:$(TUNNEL_PORT),reuseaddr,fork"
+            - "PROXY:$(EXTERNAL_PROXY_HOST):$(LINEARB_PUBLIC_API_HOST):443,proxyport=$(EXTERNAL_PROXY_PORT)"
+          {{- else }}
+          args:
+            - "TCP4-LISTEN:$(TUNNEL_PORT),reuseaddr,fork"
+            - "TCP:$(EXTERNAL_PROXY_HOST):$(EXTERNAL_PROXY_PORT)"
+          {{- end }}
+          env:
+            - name: EXTERNAL_PROXY_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: charts-values
+                  key: EXTERNAL_PROXY_HOST
+            - name: EXTERNAL_PROXY_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: charts-values
+                  key: EXTERNAL_PROXY_PORT
+            - name: LINEARB_PUBLIC_API_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: charts-values
+                  key: LINEARB_PUBLIC_API_HOST
+            - name: TUNNEL_PORT
+              value: {{ .Values.service.port | quote }}
+          ports:
+            - name: tunnel-port
+              containerPort: {{ (int64 .Values.service.port) }}
+              protocol: TCP
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

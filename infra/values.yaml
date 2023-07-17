@@ -9,11 +9,6 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
-  env:
-    chartValues:
-      MINIO_PV_SIZE: "2Gi"
-      K8S_PLATFORM: "eks"
-
 
 imagePullSecrets: []
 nameOverride: ""

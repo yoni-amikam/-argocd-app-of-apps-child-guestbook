@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: alpine/socat
+  tag: 1.7.4.4
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 8443
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+podAnnotations: {}
+
+#external_proxy:
+#  type: < connect or transparent >

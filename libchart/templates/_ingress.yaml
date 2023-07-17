@@ -1,5 +1,4 @@
 {{- define "libchart.ingress" -}}
-{{- if .Values.image.env.chartValues.RECEIVER_INGRESS -}}
 {{- $fullName := include "libchart.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
@@ -38,7 +37,6 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    
     {{- range .Values.ingress.hosts }}
     - http:
         paths:
@@ -59,5 +57,4 @@ spec:
               {{- end }}
           {{- end }}
     {{- end }}
-{{- end }}
 {{- end }}

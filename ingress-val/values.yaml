@@ -1,0 +1,22 @@
+#imagePullSecrets: 
+#  - name: regcred
+controller:
+  service:
+    targetPorts:
+      # http: http
+      http: 80
+      https: http
+    annotations:
+      dummy: "dummy"
+    
+  config:
+    enable-underscores-in-headers: "true"
+    keepalive_timeout: "185"
+    use-proxy-protocol: "false"
+    real-ip-header: "proxy_protocol"
+    set-real-ip-from: "0.0.0.0/0"
+    proxy-read-timeout: "185"
+    proxy-send-timeout: "185"
+    use-forwarded-headers: "false"
+    server-tokens: "false"
+  kind: Deployment

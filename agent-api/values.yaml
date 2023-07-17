@@ -8,9 +8,9 @@ image:
   repository: linearb-on-prem.jfrog.io/agent-api
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v2.0.2-k8s"
+  tag: "support-external-proxy-k8s"
   env:
-    parametersStore:
+    configMap:
       - name: "PLATFORM"
         valueFrom:
           configMapKeyRef:
@@ -26,21 +26,11 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "LINB_REST_SERVICE_URL"
-      - name: "DOCKER_CLEANUP_TIME_DELTA"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "DOCKER_CLEANUP_TIME_DELTA"
       - name: "ORG_ID"
         valueFrom:
           configMapKeyRef:
             name: "charts-values"
             key: "ORG_ID"
-      - name: "ONGOING_INITIAL_BACKWARD_DAYS"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "ONGOING_INITIAL_BACKWARD_DAYS"
       - name: "ONGOING_CONCURRENT_PROCESSES"
         valueFrom:
           configMapKeyRef:
@@ -51,6 +41,16 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "AWS_DEFAULT_REGION"
+      - name: "AWS_ACCESS_KEY_ID"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_ACCESS_KEY_ID"
+      - name: "AWS_SECRET_ACCESS_KEY"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_SECRET_ACCESS_KEY"
       - name: "CACHE_REDIS_PORT"
         valueFrom:
           configMapKeyRef:
@@ -71,7 +71,58 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "LINEARB_PUBLIC_API_KEY"
+      - name: "PR_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "PR_SERVICE_URL"
+      - name: "SETTINGS_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "SETTINGS_SERVICE_URL"
+      - name: "PM_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "PM_REST_SERVICE_URL"
+      - name: "LINTA_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINTA_REST_SERVICE_URL"
+      - name: "LINTA_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINTA_SERVICE_URL"
+      - name: "SENSORS_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "SENSORS_SERVICE_URL"
+      - name: "AGENT_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AGENT_SERVICE_URL"
+      - name: "ON_PREM_API_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ON_PREM_API_SERVICE_URL"
+      - name: "INFERENCE_ESTIMATED_REVIEW_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "INFERENCE_ESTIMATED_REVIEW_URL"
+      - name: "S3_UPLOAD_THREAD_POOL_SIZE"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "S3_UPLOAD_THREAD_POOL_SIZE"
 
+# imagePullSecrets: []
 imagePullSecrets:
   - name: regcred
 nameOverride: ""

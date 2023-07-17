@@ -23,5 +23,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.image.env.chartValues.MINIO_PV_SIZE }}
+      storage: {{ include "infra.minio_pv_size" . | quote }}
 {{- end }}

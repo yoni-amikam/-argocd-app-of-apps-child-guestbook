@@ -1,4 +1,4 @@
-{{- define "libchart.deployment" -}}
+{{- define "libchart.deployment_v2" -}}
 {{- $fullName := include "libchart.fullname" . }}
 apiVersion: apps/v1
 kind: Deployment
@@ -6,7 +6,6 @@ metadata:
   name: "{{ $fullName }}"
   labels:
     {{- include "libchart.labels" . | nindent 4 }}
-    
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -23,7 +22,6 @@ spec:
   selector:
     matchLabels:
       {{- include "libchart.selectorLabels" . | nindent 6 }}
-      
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -35,7 +33,6 @@ spec:
         {{- if eq .Values.image.pullPolicy "Always" }}
         date: "{{ now | unixEpoch }}"
         {{- end }}
-        
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -68,12 +65,6 @@ spec:
           {{- end }}
           env:     
             {{- with .Values.image.env }}
-              {{- if  .chartValues -}}
-              {{- range $key, $value := .chartValues }}
-              - name: {{ $key }}
-                value: {{ $value | quote }}
-              {{- end }}
-              {{- end }}
               {{- range .secrets }}
               - name: {{ .name }}
                 valueFrom:
@@ -81,14 +72,16 @@ spec:
                     name: {{ .valueFrom.secretKeyRef.name }}
                     key: {{ .valueFrom.secretKeyRef.key | quote }}
               {{- end }}
-              {{- range .parametersStore }}
+              {{- range .configMap }}
               - name: {{ .name }}
                 valueFrom:
-                  secretKeyRef:
-                    name: {{ .valueFrom.secretKeyRef.name }}
-                    key: {{ .valueFrom.secretKeyRef.key | quote }}
+                  configMapKeyRef:
+                    name: {{ .valueFrom.configMapKeyRef.name }}
+                    key: {{ .valueFrom.configMapKeyRef.key | quote }}
               {{- end }}
             {{- end }}
+              - name: TAG
+                value: {{ .Values.image.tag }}
               - name: THIS_POD_NAMESPACE
                 valueFrom:
                   fieldRef:
@@ -107,8 +100,12 @@ spec:
                 valueFrom: 
                   configMapKeyRef:
                     name: charts-values
-                    key: DD_ENV  
-          
+                    key: DD_ENV
+              - name: DD_API_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: charts-values
+                    key: DD_API_KEY
           {{- if .Values.service }}
           ports:
             - name: http

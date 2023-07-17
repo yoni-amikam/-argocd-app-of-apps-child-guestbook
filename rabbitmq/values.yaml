@@ -1,3 +1,0 @@
-auth:
-  username: admin2
-  existingPasswordSecret: my-secret
