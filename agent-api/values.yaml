@@ -8,7 +8,7 @@ image:
   repository: linearb-on-prem.jfrog.io/agent-api
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "retrive-all-values-from-cm-k8s"
+  tag: "support-external-proxy-k8s"
   env:
     configMap:
       - name: "PLATFORM"
