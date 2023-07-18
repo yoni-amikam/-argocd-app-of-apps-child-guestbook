@@ -7,7 +7,124 @@ replicaCount: 1
 image:
   repository: linearb-on-prem.jfrog.io/jobs-suite-dispatcher
   pullPolicy: Always
-  tag: "placeholder"
+  tag: "develop-k8s"
+  env:
+    configMap:
+      - name: "ON_PREM_API_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "ON_PREM_API_SERVICE_URL"
+      - name: "RABBITMQ_USER"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_USER"
+      - name: "RABBITMQ_PASSWORD"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_PASSWORD"
+      - name: "RABBIT_SERVER"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBIT_SERVER"
+      - name: "RABBITMQ_PORT"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_PORT"
+      - name: "RABBITMQ_JOBS_SUITES_QUEUE_NAME"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "RABBITMQ_JOBS_SUITES_QUEUE_NAME"
+      - name: "EXECUTION_MODE"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "EXECUTION_MODE"
+      - name: "AWS_DEFAULT_REGION"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_DEFAULT_REGION"
+      - name: "AWS_ACCESS_KEY_ID"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_ACCESS_KEY_ID"
+      - name: "AWS_SECRET_ACCESS_KEY"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AWS_SECRET_ACCESS_KEY"
+      - name: "S3_UPLOAD_THREAD_POOL_SIZE"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "S3_UPLOAD_THREAD_POOL_SIZE"
+      - name: "CACHE_REDIS_HOST"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "CACHE_REDIS_HOST"
+      - name: "CACHE_REDIS_PORT"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "CACHE_REDIS_PORT"
+      - name: "CACHE_REDIS_DB"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "CACHE_REDIS_DB"
+      - name: "LINB_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINB_REST_SERVICE_URL"
+      - name: "PR_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "PR_SERVICE_URL"
+      - name: "SETTINGS_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "SETTINGS_SERVICE_URL"
+      - name: "PM_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "PM_REST_SERVICE_URL"
+      - name: "LINTA_REST_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINTA_REST_SERVICE_URL"
+      - name: "LINTA_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "LINTA_SERVICE_URL"
+      - name: "SENSORS_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "SENSORS_SERVICE_URL"
+      - name: "AGENT_SERVICE_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "AGENT_SERVICE_URL"
+      - name: "INFERENCE_ESTIMATED_REVIEW_URL"
+        valueFrom:
+          configMapKeyRef:
+            name: "charts-values"
+            key: "INFERENCE_ESTIMATED_REVIEW_URL"
 
 imagePullSecrets:
   - name: regcred
