@@ -1,4 +1,4 @@
-{{- if eq .Values.image.env.chartValues.K8S_PLATFORM "k3d" }}
+{{- if eq .Values.image.env.K8S_PLATFORM "k3d" }}
 ---
 apiVersion: v1
 kind: PersistentVolume
