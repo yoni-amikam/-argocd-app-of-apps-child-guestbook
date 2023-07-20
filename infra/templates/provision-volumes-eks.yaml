@@ -1,4 +1,4 @@
-{{- if eq .Values.image.env.K8S_PLATFORM "eks" }}
+{{- if eq "eks" (.Values.image.env.chartValues.K8S_PLATFORM | toString) -}}
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
