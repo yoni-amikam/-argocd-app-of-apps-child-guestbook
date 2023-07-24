@@ -11,6 +11,8 @@ image:
   tag: "develop-k8s"
   env:
     chartValuesV2:
+      - name: yoni
+        value: moshe
       yoni: moshe
     configMap:
       - name: "ORG_ID"
