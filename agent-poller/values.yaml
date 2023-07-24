@@ -9,8 +9,6 @@ image:
   pullPolicy: Always
   tag: "develop-k8s"
   env:
-    chartValues:
-      RECEIVER_INGRESS: true
     chartValuesV2:
       - name: RABBITMQ_JOBS_SUITES_QUEUE_NAME
         value: "q-job-suites"
