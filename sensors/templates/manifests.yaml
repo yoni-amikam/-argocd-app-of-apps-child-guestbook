@@ -1,4 +1,4 @@
-{{- include "libchart.deployment_v2"  . }}
+{{- include "libchart.deployment"  . }}
 ---
 {{- include "libchart.serviceAccount"  . }}
 ---

@@ -9,23 +9,6 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "6.0.5"
-  env:
-    configMap:
-      - name: "CACHE_REDIS_HOST"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "CACHE_REDIS_HOST"
-      - name: "CACHE_REDIS_PORT"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "CACHE_REDIS_PORT"
-      - name: "CACHE_REDIS_DB"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "CACHE_REDIS_DB"
 
 imagePullSecrets: []
 nameOverride: ""

@@ -9,6 +9,9 @@ image:
   pullPolicy: Always
   tag: "develop-k8s"
   env:
+    chartValuesV2:
+      - name: RABBITMQ_JOBS_SUITES_QUEUE_NAME
+        value: "q-job-suites"
     configMap:
       - name: "ON_PREM_API_SERVICE_URL"
         valueFrom:
@@ -35,11 +38,6 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "RABBITMQ_PORT"
-      - name: "RABBITMQ_JOBS_SUITES_QUEUE_NAME"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "RABBITMQ_JOBS_SUITES_QUEUE_NAME"
       - name: "EXECUTION_MODE"
         valueFrom:
           configMapKeyRef:

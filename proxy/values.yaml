@@ -37,11 +37,6 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "LINEARB_PUBLIC_API_ERT_PATH"
-      - name: "INFERENCE_ESTIMATED_REVIEW_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "INFERENCE_ESTIMATED_REVIEW_URL"
 
 #imagePullSecrets: []
 imagePullSecrets:
@@ -90,6 +85,8 @@ additionalPorts:
     port: 3132
   - name: "port3133"
     port: 3133
+  - name: "port3135"
+    port: 3135
   
 ingress:
   enabled: false

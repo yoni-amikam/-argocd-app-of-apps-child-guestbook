@@ -10,6 +10,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "support-external-proxy-k8s"
   env:
+    chartValuesV2:
+      - name: PORT
+        value: 8080
     configMap:
       - name: "PLATFORM"
         valueFrom:

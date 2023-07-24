@@ -11,6 +11,9 @@ image:
   tag: ""
   command: ["./run-celery.sh"]
   env:
+    chartValuesV2:
+      - name: RABBITMQ_BATCH_JOBS_QUEUE_NAME
+        value: "q-batch-jobs"
     configMap:
       - name: "ON_PREM_API_SERVICE_URL"
         valueFrom:
@@ -37,11 +40,6 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "RABBITMQ_PORT"
-      - name: "RABBITMQ_BATCH_JOBS_QUEUE_NAME"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "RABBITMQ_BATCH_JOBS_QUEUE_NAME"
       - name: "ONPREM_LINTA_IMAGE"
         valueFrom:
           configMapKeyRef:
@@ -117,11 +115,6 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "SCHEDULER_NUMBER_OF_CELERY_WORKERS"
-      - name: "ONGOING_CONCURRENT_PROCESSES"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "ONGOING_CONCURRENT_PROCESSES"
 
 imagePullSecrets:
   - name: regcred

@@ -18,14 +18,14 @@ spec:
     port: {{ .Values.service.port }}
     targetPort: http
     {{- end }}
-  {{- if .Values.additionalPorts }}
-  {{- range .Values.additionalPorts }}
-  - name: {{ .name }}
-    port: {{ .port }}
-    protocol: TCP
-    targetPort: {{ .name }}
-  {{- end }}
-  {{- end }}
+    {{- if .Values.additionalPorts }}
+    {{- range .Values.additionalPorts }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      protocol: TCP
+      targetPort: {{ .name }}
+    {{- end }}
+    {{- end }}
   selector:
     {{- include "libchart.selectorLabels" . | nindent 4 }}
 {{- end }}

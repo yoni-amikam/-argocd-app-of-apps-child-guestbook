@@ -1,4 +1,4 @@
-{{- if eq "eks" (.Values.image.env.chartValues.K8S_PLATFORM | toString) -}}
+{{- if eq .Values.image.env.chartValues.K8S_PLATFORM "eks" }}
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -23,5 +23,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: "1Gi"
+      storage: {{ include "infra.minio_pv_size" . | quote }}
 {{- end }}

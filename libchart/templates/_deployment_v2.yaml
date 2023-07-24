@@ -63,7 +63,7 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- end }}
-          env:     
+          env:
             {{- with .Values.image.env }}
               {{- range .secrets }}
               - name: {{ .name }}
@@ -79,25 +79,31 @@ spec:
                     name: {{ .valueFrom.configMapKeyRef.name }}
                     key: {{ .valueFrom.configMapKeyRef.key | quote }}
               {{- end }}
+              {{- range .chartValuesV2 }}
+              - name: {{ .name }}
+                value: {{ .value | quote }}
+              {{- end }}
             {{- end }}
               - name: TAG
                 value: {{ .Values.image.tag }}
+              - name: LOGGING_LEVEL
+                value: INFO
               - name: THIS_POD_NAMESPACE
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.namespace
               - name: DD_TAGS
-                valueFrom: 
+                valueFrom:
                   configMapKeyRef:
                     name: charts-values
                     key: DD_TAGS
               - name: DD_ENV
-                valueFrom: 
+                valueFrom:
                   configMapKeyRef:
                     name: charts-values
                     key: DD_ENV
               - name: DD_ENV_TAG
-                valueFrom: 
+                valueFrom:
                   configMapKeyRef:
                     name: charts-values
                     key: DD_ENV

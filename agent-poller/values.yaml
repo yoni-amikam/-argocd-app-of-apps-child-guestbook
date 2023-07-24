@@ -9,6 +9,9 @@ image:
   pullPolicy: Always
   tag: "develop-k8s"
   env:
+    chartValuesV2:
+      - name: RABBITMQ_JOBS_SUITES_QUEUE_NAME
+        value: "q-job-suites"
     configMap:
       - name: "ON_PREM_API_SERVICE_URL"
         valueFrom:
@@ -35,56 +38,6 @@ image:
           configMapKeyRef:
             name: "charts-values"
             key: "RABBITMQ_PORT"
-      - name: "RABBITMQ_JOBS_SUITES_QUEUE_NAME"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "RABBITMQ_JOBS_SUITES_QUEUE_NAME"
-      - name: "LINB_REST_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "LINB_REST_SERVICE_URL"
-      - name: "PR_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "PR_SERVICE_URL"
-      - name: "SETTINGS_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "SETTINGS_SERVICE_URL"
-      - name: "PM_REST_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "PM_REST_SERVICE_URL"
-      - name: "LINTA_REST_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "LINTA_REST_SERVICE_URL"
-      - name: "LINTA_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "LINTA_SERVICE_URL"
-      - name: "SENSORS_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "SENSORS_SERVICE_URL"
-      - name: "AGENT_SERVICE_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "AGENT_SERVICE_URL"
-      - name: "INFERENCE_ESTIMATED_REVIEW_URL"
-        valueFrom:
-          configMapKeyRef:
-            name: "charts-values"
-            key: "INFERENCE_ESTIMATED_REVIEW_URL"
 
 imagePullSecrets:
   - name: regcred

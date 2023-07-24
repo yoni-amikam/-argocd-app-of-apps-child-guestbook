@@ -1,4 +1,4 @@
-{{- if eq "k3d" (.Values.image.env.chartValues.K8S_PLATFORM | toString) -}}
+{{- if eq .Values.image.env.chartValues.K8S_PLATFORM "k3d" }}
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -26,7 +26,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: "1Gi"
+      storage: {{ include "infra.minio_pv_size" . | quote }}
   selector:
     matchLabels:
       purpose: minio
