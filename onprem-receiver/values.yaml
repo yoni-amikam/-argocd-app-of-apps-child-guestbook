@@ -10,7 +10,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "develop-k8s"
   env:
-    chartValues2:
+    chartValuesV2:
       yoni: moshe
     configMap:
       - name: "ORG_ID"
